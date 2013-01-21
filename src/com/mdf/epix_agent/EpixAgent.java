@@ -3,7 +3,7 @@ package com.mdf.epix_agent;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity
+public class EpixAgent extends Activity
 {
     /** Called when the activity is first created. */
     @Override
