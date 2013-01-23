@@ -1,23 +1,28 @@
 package com.mdf.epix_agent;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.MotionEvent;
 
 public class EpixAgent extends Activity
 {
+	private boolean login = false;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		LayoutInflater inflater = getLayoutInflater();
-		builder.setView(inflater.inflate(R.layout.login_dialog, null));
-		Dialog dialog = builder.create();
-		dialog.show();
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event)
+	{
+		if (!login) {
+			setContentView(R.layout.login_dialog);
+			login = true;
+		}
+		
+		return super.onTouchEvent(event);
 	}
 }
