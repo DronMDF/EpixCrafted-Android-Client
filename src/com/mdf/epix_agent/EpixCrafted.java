@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
-public class EpixAgent extends Activity
+public class EpixCrafted extends Activity
 {
 	private boolean login = false;
 	

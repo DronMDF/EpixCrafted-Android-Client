@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EpixAgent</string>
-    <string name="login_hint">Enter a login</string>
-    <string name="password_hint">Enter a password</string>
+	<string name="app_name">EpixCrafted</string>
+	<string name="login_hint">Enter a login</string>
+	<string name="password_hint">Enter a password</string>
 </resources>
+
