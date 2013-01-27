@@ -1,6 +1,7 @@
 package com.mdf.epix_agent;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
@@ -13,6 +14,17 @@ public class EpixCrafted extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		SharedPreferences settings = getPreferences(0);
+		String session_id = settings.getString("session_id", "");
+		if (session_id == "") {
+			// Start login activity;
+			setContentView(R.layout.login_dialog);
+		}
 	}
 	
 	@Override
