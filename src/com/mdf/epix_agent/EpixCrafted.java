@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 public class EpixCrafted extends Activity
 {
@@ -29,11 +30,18 @@ public class EpixCrafted extends Activity
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK && requestCode == PICK_SESSION_ID) {
-			SharedPreferences prferences = getPreferences(0);
-			SharedPreferences.Editor editor = prferences.edit();
-			editor.putString("session_id", "xxx");
-			editor.commit();
-		}
+		if (resultCode != Activity.RESULT_OK) return;
+		if (requestCode != PICK_SESSION_ID) return;
+		if (data == null) return;
+
+		Bundle bundle = data.getExtras();
+		if (bundle == null) return;
+		
+		String session_id = bundle.getString("session_id");
+		Log.d("SESSION", session_id);
+		SharedPreferences prferences = getPreferences(0);
+		SharedPreferences.Editor editor = prferences.edit();
+		editor.putString("session_id", session_id);
+		editor.commit();
 	}
 }
