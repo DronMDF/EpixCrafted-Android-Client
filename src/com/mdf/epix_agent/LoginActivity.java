@@ -14,10 +14,14 @@ public class LoginActivity extends Activity
 	}
 
 	public void onOkClick(View v) {
-		
 		Intent intent = getIntent();
 		intent.putExtra("session_id", "test session id");
 		returnResult(RESULT_OK, intent);
+		finish();
+	}
+
+	public void onCancelClick(View v) {
+		returnResult(RESULT_CANCELED, null);
 		finish();
 	}
 
@@ -27,11 +31,6 @@ public class LoginActivity extends Activity
 		super.onBackPressed();
 	}
 	
-	public void onCancelClick(View v) {
-		returnResult(RESULT_CANCELED, null);
-		finish();
-	}
-
 	private void returnResult(int code, Intent intent) {
 		if (getParent() == null) {
 			setResult(code, intent);
