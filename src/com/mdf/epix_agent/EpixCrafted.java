@@ -21,23 +21,25 @@ public class EpixCrafted extends Activity
 		super.onResume();
 		SharedPreferences settings = getPreferences(0);
 		String session_id = settings.getString("session_id", "");
-		if (session_id == "") {
+		//if (session_id == "") {
 			Intent intent = new Intent(Intent.ACTION_PICK);
 			intent.setClass(this, LoginActivity.class);
 			startActivityForResult(intent, PICK_SESSION_ID);
-		}
+		//}
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode != Activity.RESULT_OK) return;
 		if (requestCode != PICK_SESSION_ID) return;
-		if (data == null) return;
-
-		Bundle bundle = data.getExtras();
-		if (bundle == null) return;
 		
-		String session_id = bundle.getString("session_id");
+		String session_id = "cancelled";
+		if (resultCode == RESULT_OK) {
+			if (data == null) return;
+			Bundle bundle = data.getExtras();
+			if (bundle == null) return;
+			session_id = bundle.getString("session_id");
+		}
+		
 		Log.d("SESSION", session_id);
 		SharedPreferences prferences = getPreferences(0);
 		SharedPreferences.Editor editor = prferences.edit();
