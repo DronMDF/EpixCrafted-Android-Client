@@ -1,8 +1,12 @@
 package com.mdf.epix_agent;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -47,6 +51,14 @@ public class LoginActivity extends Activity
 	}
 	
 	private String getSessionId(String login, String password) {
-		return login + ":" + password;
+		JSONObject json = new JSONObject();
+		try {
+			json.put("login", login);
+			json.put("password", password);
+			json.put("client", "android");
+		} catch (JSONException e) {
+			Log.d("JSON", e.getMessage());
+		}
+		return json.toString();
 	}
 }
