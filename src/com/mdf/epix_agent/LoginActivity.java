@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class LoginActivity extends Activity
 {
@@ -14,8 +15,14 @@ public class LoginActivity extends Activity
 	}
 
 	public void onOkClick(View v) {
+		EditText login = (EditText)findViewById(R.id.login); 
+		EditText password = (EditText)findViewById(R.id.password);
+		
+		String session_id = login.getText().toString() + ":" + 
+				password.getText().toString();
+		
 		Intent intent = getIntent();
-		intent.putExtra("session_id", "test session id");
+		intent.putExtra("session_id", session_id);
 		returnResult(RESULT_OK, intent);
 		finish();
 	}
