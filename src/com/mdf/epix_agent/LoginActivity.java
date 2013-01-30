@@ -18,8 +18,8 @@ public class LoginActivity extends Activity
 		EditText login = (EditText)findViewById(R.id.login); 
 		EditText password = (EditText)findViewById(R.id.password);
 		
-		String session_id = login.getText().toString() + ":" + 
-				password.getText().toString();
+		String session_id = getSessionId(login.getText().toString(), 
+			password.getText().toString());
 		
 		Intent intent = getIntent();
 		intent.putExtra("session_id", session_id);
@@ -44,5 +44,9 @@ public class LoginActivity extends Activity
 		} else {
 			getParent().setResult(code, intent);
 		}
+	}
+	
+	private String getSessionId(String login, String password) {
+		return login + ":" + password;
 	}
 }
