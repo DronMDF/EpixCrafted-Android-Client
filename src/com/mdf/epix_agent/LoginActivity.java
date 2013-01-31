@@ -1,5 +1,16 @@
 package com.mdf.epix_agent;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,6 +70,29 @@ public class LoginActivity extends Activity
 		} catch (JSONException e) {
 			Log.d("JSON", e.getMessage());
 		}
-		return json.toString();
+		
+		String session_id = "";
+		
+		HttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost("http://epixcrafted.org/api/method");
+		try {
+			post.setEntity(new StringEntity(json.toString()));
+			HttpResponse response = client.execute(post);
+			StatusLine statusLine = response.getStatusLine();
+			if (statusLine.getStatusCode() == 200) {
+				HttpEntity entity = response.getEntity();
+				session_id = entity.toString();
+			} else {
+				Log.e("HTTP", "Failed to request");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return session_id;
 	}
 }
